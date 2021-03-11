@@ -3,8 +3,12 @@
 *~
 .*
 *.py.bak
+__pycache__
+__init__.py
 
-
+myvenv
+db.sqlite3
+migrations/
 /site/
 /htmlcov/
 /coverage/
