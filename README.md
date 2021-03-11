@@ -1,4 +1,4 @@
-# fincaRaiz
+# Backend Finca Raiz
 Api developed with Django Rest Framework
 
 ### Postman collection 
