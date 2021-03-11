@@ -16,11 +16,31 @@ class PropertiesList(mixins.ListModelMixin,
     queryset = Properties.objects.all()
     serializer_class = PropertiesSerializer
 
-    def get(self, request, format=None):
-        category = request.data['category']
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+
+class PropertiesDetail(mixins.RetrieveModelMixin,
+                    mixins.UpdateModelMixin,
+                    mixins.DestroyModelMixin,
+                    generics.GenericAPIView):
+    queryset = Properties.objects.all()
+    serializer_class = PropertiesSerializer
+
+    def get(self, request, *args, **kwargs):
+        print (self.kwargs.get('pk'))
+        category = self.kwargs.get('pk')
         propertie = Properties.objects.filter(category=category)
         serializer = PropertiesSerializer(propertie, many=True)
         return Response(serializer.data)
 
-    def post(self, request, *args, **kwargs):
-        return self.create(request, *args, **kwargs)
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
+
+    def patch(self, request, *args, **kwargs):
+        return self.partial_update(request, *args, **kwargs)
+
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
